@@ -1,40 +1,40 @@
-name: CI
+# name: CI
 
-on: push
+# on: push
 
-jobs:
-    build-job:
-        runs-on: ubuntu-latest
-        steps:
-          - name: Checkout
-            uses: actions/checkout@v4.2.0
+# jobs:
+#     build-job:
+#         runs-on: ubuntu-latest
+#         steps:
+#           - name: Checkout
+#             uses: actions/checkout@v4.2.0
 
-          - uses: azure/docker-login@v2
-            with:
-                  login-server: actionsacrreg.azurecr.io
-                  username: ${{ secrets.ACR_USERNAME }}
-                  password: ${{ secrets.ACR_PASSWORD }}
+#           - uses: azure/docker-login@v2
+#             with:
+#                   login-server: actionsacrreg.azurecr.io
+#                   username: ${{ secrets.ACR_USERNAME }}
+#                   password: ${{ secrets.ACR_PASSWORD }}
 
              
-          - run: |
-              docker build . -t actionsacrreg.azurecr.io/k8sdemo:${{ github.sha }}
-              docker push actionsacrreg.azurecr.io/k8sdemo:${{ github.sha }}
+#           - run: |
+#               docker build . -t actionsacrreg.azurecr.io/k8sdemo:${{ github.sha }}
+#               docker push actionsacrreg.azurecr.io/k8sdemo:${{ github.sha }}
 
 
 
-          - uses: azure/k8s-set-context@v4
-            with:
-              method: kubeconfig
-              kubeconfig: arc_kubeconfig_1727625875462
-              context: default # current-context from kubeconfig is used as default
+#           - uses: azure/k8s-set-context@v4
+#             with:
+#               method: kubeconfig
+#               kubeconfig: arc_kubeconfig_1727625875462
+#               context: default # current-context from kubeconfig is used as default
             
 
-        #   - uses: azure/k8s-set-context@v4
-        #     with:
-        #        method: service-principal
-        #        cluster-type: arc
-        #        cluster-name: ACR-deployment
-        #        resource-group: aksactions
+#         #   - uses: azure/k8s-set-context@v4
+#         #     with:
+#         #        method: service-principal
+#         #        cluster-type: arc
+#         #        cluster-name: ACR-deployment
+#         #        resource-group: aksactions
 
            
             
