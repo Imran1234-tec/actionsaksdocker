@@ -30,7 +30,7 @@ jobs:
       with:
         method: kubeconfig
         kubeconfig: ${{secrets.KUBE_CONFIG}}
-        context: default
+        context: kind-kind
         cluster-type: generic
       env:
         DOCKER_CONFIG: /home/runner/work/_temp/docker_login_1727626321913
