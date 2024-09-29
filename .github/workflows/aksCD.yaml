@@ -1,0 +1,40 @@
+name: Deploy to AKS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Docker
+      uses: docker/login-action@v2
+      with:
+        registry: actionsacrreg.azurecr.io
+        username: ${{ secrets.ACR_USERNAME }}
+        password: ${{ secrets.ACR_PASSWORD }}
+
+    - name: Set Kubernetes context
+      uses: azure/setup-kubectl@v1
+      with:
+        version: 'latest'
+
+    - name: Run k8s-set-context
+      uses: azure/k8s-set-context@v4
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.KUBE_CONFIG }}
+        context: default
+        cluster-type: generic
+      env:
+        DOCKER_CONFIG: /home/runner/work/_temp/docker_login_1727626321913
+
+    - name: Deploy to AKS
+      run: |
+        kubectl apply -f deployment.yaml
