@@ -17,8 +17,8 @@ jobs:
 
              
           - run: |
-              docker build . -t contoso.azurecr.io/k8sdemo:${{ github.sha }}
-              docker push contoso.azurecr.io/k8sdemo:${{ github.sha }}
+              docker build . -t actionsacrreg.azurecr.io/k8sdemo:${{ github.sha }}
+              docker push actionsacrreg.azurecr.io/k8sdemo:${{ github.sha }}
             
 
            
