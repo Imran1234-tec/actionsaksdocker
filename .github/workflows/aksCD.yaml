@@ -26,7 +26,7 @@ jobs:
       with:
         method: kubeconfig
         kubeconfig: ${{secrets.KUBE_CONFIG}}
-        context: aks-cluster
+        context: ACR-deployment
         cluster-type: generic
       env:
         DOCKER_CONFIG: /home/runner/work/_temp/docker_login_1727626321913
