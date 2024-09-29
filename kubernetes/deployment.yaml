@@ -12,7 +12,7 @@ spec:
         app: contoso-website
     spec:
       containers:
-        - image: !IMAGE!
+        - image: actionsacrreg.azurecr.io/k8sdemo:4eb763b627689936ca4c0403bd6503ff0254c80e
           name: contoso-website
           resources:
             requests:

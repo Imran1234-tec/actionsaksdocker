@@ -21,6 +21,13 @@ jobs:
               docker push actionsacrreg.azurecr.io/k8sdemo:${{ github.sha }}
             
 
+          - uses: azure/k8s-set-context@v4
+            with:
+               method: service-principal
+               cluster-type: arc
+               cluster-name: ACR-deployment
+               resource-group: aksactions
+
            
             
         
