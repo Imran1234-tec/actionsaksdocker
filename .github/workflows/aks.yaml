@@ -8,22 +8,19 @@ jobs:
         steps:
           - name: Checkout
             uses: actions/checkout@v4.2.0
-            
-          - name: Docker Login
-            uses: docker/login-action@v3.3.0
-            with:
-                registry: actionsacrreg.azurecr.io
-                username: ${{ secrets.ACR_USERNAME }}
-                password: ${{ secrets.ACR_PASSWORD }}
 
-          - name: Build and push Docker images
-            uses: docker/build-push-action@v6.8.0
+          - uses: azure/docker-login@v2
             with:
-                context: .
-                push: true
-                tags: constoapp:v1
+                  login-server: actionsacrreg.azurecr.io
+                  username: ${{ secrets.ACR_USERNAME }}
+                  password: ${{ secrets.ACR_PASSWORD }}
+
+             
+          - run: |
+              docker build . -t contoso.azurecr.io/k8sdemo:${{ github.sha }}
+              docker push contoso.azurecr.io/k8sdemo:${{ github.sha }}
             
-                
+
            
             
         
