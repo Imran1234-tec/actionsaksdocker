@@ -31,7 +31,7 @@ jobs:
             with:
                namespace: 'default'
                manifests: |
-                   kubernetes/*
+                   kubernetes/
                    images: actionsacrreg.azurecr.io/k8sdemo:bf124c23308927e57222229fe9bf0dfb2ccabe4d
                    pull-images: true
 
