@@ -27,6 +27,14 @@ jobs:
                 kubeconfig: ${{ secrets.KUBE_CONFIG }}
                 context: ACR-deployment # current-context from kubeconfig is used as default
 
+          - uses: Azure/k8s-deploy@v5
+            with:
+               namespace: 'default'
+               manifests: |
+                   kubernetes/*
+                   images: actionsacrreg.azurecr.io/k8sdemo:bf124c23308927e57222229fe9bf0dfb2ccabe4d
+                   pull-images: true
+
 
 
 
